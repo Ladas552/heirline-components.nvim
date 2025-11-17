@@ -316,7 +316,7 @@ function M.lsp_progress()
   vim.lsp.handlers["$/progress"] = function(_, msg, info)
     local progress, id = lsp.progress, ("%s.%s"):format(info.client_id, msg.token)
     progress[id] = progress[id] and utils.extend_tbl(progress[id], msg.value) or msg.value
-    if progress[id].kind == "end" then
+    if progress[id] and progress[id].kind == "end" then
       vim.defer_fn(function()
         progress[id] = nil
         utils.trigger_event("User HeirlineComponentsUpdateLspProgress")
