@@ -323,7 +323,7 @@ function M.ruler(opts)
   local padding_str =
       string.format("%%%dd:%%-%dd", opts.pad_ruler.line, opts.pad_ruler.char)
   return function()
-    local line = vim.fn.wordcount().words "."
+    local line = tostring(vim.fn.wordcount().words) "."
     local char = vim.fn.virtcol "."
     return core_utils.stylize(string.format(padding_str, line, char), opts)
   end
